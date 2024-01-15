@@ -15,7 +15,6 @@ using namespace std;
 int main() {
 	multimap<string,string> Files; //First element is the name, second is filename.
 	map<string,string> Users; //first element is the name, second is the IP and port of Client's personal server.
-	int portnumbers = 1025; //These ports will be assigned to the users as they come.
 	string nameofUser; //Used for a bunch of things. Can't explain right now.
 	bool repeatUser = false;
 
@@ -82,7 +81,6 @@ int main() {
 							Users[buffer] = string(inet_ntoa(c_addr.sin_addr)) + ":" + string(buffer); //Other users will use this port to connect to and start chats or download files.
 						
 						cout << "New user has joined: " << buffer << " - " << Users[buffer] << endl;
-						portnumbers++;
 						break;
 					}
 				}
