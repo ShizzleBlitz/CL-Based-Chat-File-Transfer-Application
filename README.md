@@ -1,4 +1,4 @@
-# CL-Based-Chat-File-Transfer-Application
+# Command Line Based Chat and File Transfer
 A command line based file transfer and chatting application made in C++ for Linux.
 
 
