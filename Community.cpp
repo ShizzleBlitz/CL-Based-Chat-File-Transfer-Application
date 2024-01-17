@@ -59,6 +59,7 @@ int main() {
 					if (recvfrom(fd, buffer, 1000, 0, (struct sockaddr*)(&c_addr), &cli_len) > 0) 
 					{
 						map<string,string>::iterator it = Users.begin();
+						string newName;
 						repeatUser = false;
 						while (it != Users.end())
 						{
@@ -75,12 +76,13 @@ int main() {
 						if (repeatUser)
 							break;
 						
+						newName = string(buffer);
 						sendto(fd, "Valid", 1000, 0, (struct sockaddr*)&c_addr, cli_len);
 						
 						if (recvfrom(fd, buffer, 1000, 0, (struct sockaddr*)(&c_addr), &cli_len) > 0) 
-							Users[buffer] = string(inet_ntoa(c_addr.sin_addr)) + ":" + string(buffer); //Other users will use this port to connect to and start chats or download files.
+							Users[newName] = string(inet_ntoa(c_addr.sin_addr)) + ":" + string(buffer); //Other users will use this port to connect to and start chats or download files.
 						
-						cout << "New user has joined: " << buffer << " - " << Users[buffer] << endl;
+						cout << "New user has joined: " << Users[newName] << " - " << buffer << endl;
 						break;
 					}
 				}
@@ -161,7 +163,7 @@ int main() {
 				}
 				
 				sendto(fd, "ListEnd", 1000, 0, (struct sockaddr*)(&c_addr), cli_len);
-				repeatUser = false; //This isn't actually used for repeat users, but to check whether the user has cancelled out of 
+				repeatUser = false; //This isn't actually used for repeat users, but to check whether the user has cancelled out of downloading
 				while (1) {
 					bzero(buffer, sizeof(buffer));
 					if (recvfrom(fd, buffer, 1000, 0, (struct sockaddr*)(&c_addr), &cli_len) > 0) 

@@ -376,7 +376,6 @@ int main() {
 	int* status;
 	*status = 0; //0 means keep the main thread running, 1 user is talking to another user server and 2 means file is being downloaded.
 	pthread_t th_handler;
-	int assignedport;
 	
 	int fd = socket(AF_INET, SOCK_DGRAM, 0);
 	if (fd == -1) {
